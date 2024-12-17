@@ -1,0 +1,16 @@
+#1 bejelentkezes:
+    üdvözlő szöveg
+    bejelentkezes / regisztráció 
+        regisztráció:
+            felhasználó név: nem lehet üres
+            jelszó: kétszer kell, minden szabálynak megfelel és egy biztonsági kérdés pl első kutyád neve
+        bejelentkezes: 
+            felhasználó név, jelszó bekérése ha nem jó a jelszó (3x) biztonsági kérdés --> új jelszó bekérése 2x
+#2 bejegyzesek: 
+    bejegyzések
+        első regisztráció kor csak egy opció új felvétele 
+        ezután többi opció (módosítás, készre állítás, törlés)
+        két lista: -meglévő
+                   -készre
+        felhasználó eldönti, hogy elvégzendő, aktuális hét vagy saját feladat a bejegyzések
+        ezek a bejegyzések ne vesszenek el minden kilépéskor
