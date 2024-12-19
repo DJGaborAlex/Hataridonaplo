@@ -1,0 +1,13 @@
+DEADLINES
+
+Felhasználó regisztrálása - 12.23 Hétfő Németh Imre
+Felhasználó bejelentkezése - 12.24 Kedd Szilágyi Bálint
+Bejegyzések karbantartása - 12.24 Kedd Szabó Gábor Alex
+Bejegyzések szétválasztása:
+	Elvégzendő - 12.26 Csütörtök Szilágyi Bálint
+	Aktuális hét - 12.27 Péntek Szabó Gábor Alex
+	Meglévő - 12.27 Péntek Németh Imre
+
+Fejlesztői dokumentáció - 12.30 Hétfő Szilágyi Bálint
+Felhasználói dokumentáció - 12.29 Vasárnap Németh Imre
+Prezentáció - 12.31 Kedd Szabó Gábor Alex
