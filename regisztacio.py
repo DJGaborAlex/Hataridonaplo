@@ -1,6 +1,6 @@
 allapot="W"
-mas=True
-while allapot!="" and mas:
+
+while allapot!="":
     def regisztracio():
         user=input()
         pw=input()
