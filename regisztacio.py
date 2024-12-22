@@ -1,3 +1,4 @@
+import hashlib
 allapot="W"
 
 while allapot!="":
