@@ -1,3 +1,4 @@
+#Ez csak egy teszt, amelyet Imre dolgozott ki
 allapot="W"
 import hashlib
 from datetime import date
