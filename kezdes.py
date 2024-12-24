@@ -1,6 +1,8 @@
 user_input="q"
+meglevobejegyzesek = []
 print("Üdvözlöm!")
 import hashlib
+import os
 biztonsagikerdesek=["Kérem írja be mi a kedvenc szine: ","Kérem írja be a házi állata nevét: ", "Kérem írja be szerelme nevét: ", "Kérem írja be az általános iskolájának nevét: ", "Kérem írja be a kedvenc étele nevét: "]
 while user_input!="":
     user_input=input("Kérem írja be mit szeretne csinálni: ")
@@ -69,11 +71,68 @@ while user_input!="":
 
         with open('regisztralt.txt', 'a', encoding='utf-8') as celfajl:
             print(f'{felhasznaloneve}+{password}+{kerdesek_sorszama}+{bizt_valaszok}+', file=celfajl) 
-    
-   
 
-                    
-    
+    def UjBejegyzes():
+        fajlnev = 'bejegyzesek.txt'
+        if os.path.exists(fajlnev):
+            with open(fajlnev, 'r', encoding='utf-8') as celfajl:
+                meglevobejegyzesek = [sor.strip() for sor in celfajl.readlines()]
+
+        while True:
+            bejegyzesnev = input("Kérem adja meg a bejegyzés nevét: ").strip()
+            if bejegyzesnev == "":  
+                megjelenites = input("Szeretné látni a meglévő bejegyzéseket? (igen/nem): ").strip().lower()
+                if megjelenites == "igen":
+                    print("Meglévő bejegyzések:", meglevobejegyzesek)
+                kerdes = input("Szeretne új bejegyzést létrehozni? (igen/nem): ").strip().lower()
+                if kerdes != "igen":
+                    print("Kilépés a bejegyzés létrehozásból.")
+                    break
+            else:
+                meglevobejegyzesek.append(bejegyzesnev)
+
+ 
+        with open(fajlnev, 'w', encoding='utf-8') as celfajl:
+            for bejegyzes in meglevobejegyzesek:
+                celfajl.write(bejegyzes + '\n')
+        
+    def Modositas():
+        fajlnev = 'bejegyzesek.txt'
+        if os.path.exists(fajlnev):
+            with open(fajlnev, 'r', encoding='utf-8') as celfajl:
+                meglevobejegyzesek = [sor.strip() for sor in celfajl.readlines()]
+        
+        
+        modositas = "a"
+        while modositas != "":
+            print(meglevobejegyzesek)
+            modositas = input("Melyiket szeretné módosítani? Adja meg a sorszámát: ")
+            if modositas != "":
+                sorszam = int(modositas)
+            if not(0<sorszam <= len(meglevobejegyzesek)):
+                print("Nem megfelelő a sorszám!")
+                modositas = int(input("Melyiket szeretné módosítani? Adja meg a sorszámát: "))
+            if 0<sorszam <= len(meglevobejegyzesek) and modositas != "":
+                biztos = input(f"Biztos, hogy szeretné módosítani ezt: {meglevobejegyzesek[sorszam-1]}? (igen/nem): ").strip().lower()
+                if biztos == "igen":
+                    del meglevobejegyzesek[sorszam-1]
+                    modositott = input("Adja meg a módosított bejegyzés nevét: ")
+                    meglevobejegyzesek.append(modositott)
+                    print("Sikeresen módosítva!")
+                else:
+                    print(meglevobejegyzesek)
+                    modositas = int(input("Melyiket szeretné módosítani? Adja meg a sorszámát: "))
+                    if modositas != "":
+                        sorszam = int(modositas)
+
+        with open(fajlnev, 'w', encoding='utf-8') as celfajl:
+                    for bejegyzes in meglevobejegyzesek:
+                        celfajl.write(bejegyzes + '\n')
+
+     
     if user_input=="regisztálni":
         regisztralni()
-    
+    if user_input=="új bejegyzés":
+        UjBejegyzes()
+    if user_input=="módosítás":
+        Modositas()  
