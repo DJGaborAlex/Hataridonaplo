@@ -72,6 +72,52 @@ while user_input!="":
         with open('regisztralt.txt', 'a', encoding='utf-8') as celfajl:
             print(f'{felhasznaloneve}+{password}+{kerdesek_sorszama}+{bizt_valaszok}+', file=celfajl) 
 
+    
+    def bejelentkezes():
+        
+        with open('regisztralt.txt', 'r') as file:
+            for sor in file:
+                adat=sor.split("+")
+                jelszoprobalas = 3 
+                while jelszoprobalas != 0:
+                    username=input("Add meg a felhasználó neved: ")
+                    pw=input("Add meg a jelszót: ")
+                    titok = hashlib.sha256(pw.encode())
+                    password = titok.hexdigest()
+                    if adat[0]!=username or adat[1]!=password: 
+                        jelszoprobalas -=1
+                        print(f"Hibás felhasználónév vagy jelszó. Hátralévő próbálkozások: {jelszoprobalas}")
+                    elif adat[0]==username and adat[1]==password:
+                        print("A felhasználónév és a jelszó is egyezik!")
+                        break
+                    if jelszoprobalas == 0:
+                        break
+                if jelszoprobalas == 0:
+                    print("Nem jól adtad meg a felhasználó nevet vagy a jelszót\nA biztonsági kérdések következnek: ")
+
+                    
+                    cleaned = adat[2].replace("[", "").replace("]", "")
+                        
+                    vegso = list(map(int, cleaned.split(", ")))
+                    cleaned_bizt = adat[3].replace("[", "").replace("]", "").replace("'","")
+                    vegso_bizt=list(cleaned_bizt.split(", "))
+
+                    belepve=True
+                    for a in vegso:
+                        bizt_kerdes=input(f"{biztonsagikerdesek[a]}")
+                        titok = hashlib.sha256(bizt_kerdes.encode())
+                        titkositva_biz_kerd = titok.hexdigest()
+                        if vegso_bizt[a]==titkositva_biz_kerd:
+                            print("Helyes válasz!")
+                            
+                        else:
+                            belepve=False
+                        
+                    if belepve:
+                        print("Sikersen beléptél!") 
+
+    
+    
     def UjBejegyzes():
         fajlnev = 'bejegyzesek.txt'
         if os.path.exists(fajlnev):
@@ -132,7 +178,10 @@ while user_input!="":
      
     if user_input=="regisztálni":
         regisztralni()
+    if user_input=="bejelentkezni":
+        bejelentkezes()
     if user_input=="új bejegyzés":
         UjBejegyzes()
     if user_input=="módosítás":
         Modositas()  
+    
