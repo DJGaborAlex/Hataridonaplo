@@ -7,7 +7,13 @@ biztonsagikerdesek=["Kérem írja be mi a kedvenc szine: ","Kérem írja be a h�
 while user_input!="":
     user_input=input("Kérem írja be mit szeretne csinálni: ")
     def regisztralni():
-        felhasznaloneve=input("Kérem írja be a felhasználó nevét: ")
+        plusz=True
+        while plusz:
+            felhasznaloneve=input("Kérem írja be a felhasználó nevét: ")
+            if "+" in felhasznaloneve:
+                print("Nem lehet + a felhasznalonevébe!")
+            else:
+                plusz=False
         jelszo=input("Kérem írja be a jelszavát: ")
         megerosito=input("Ismételje meg a jelszavát!: ")
         if jelszo!=megerosito:
