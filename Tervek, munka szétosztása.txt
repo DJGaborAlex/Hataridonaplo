@@ -4,7 +4,7 @@ Felhasználó regisztrálása - 12.23 Hétfő Németh Imre
 Felhasználó bejelentkezése - 12.24 Kedd Szilágyi Bálint
 Bejegyzések karbantartása - 12.24 Kedd Szabó Gábor Alex
 Bejegyzések szétválasztása:
-	Elvégzendő - 12.26 Csütörtök Szilágyi Bálint
+	Elvégzendő - 12.27 Csütörtök Szilágyi Bálint
 	Aktuális hét - 12.27 Péntek Szabó Gábor Alex
 	Meglévő - 12.27 Péntek Németh Imre
 
