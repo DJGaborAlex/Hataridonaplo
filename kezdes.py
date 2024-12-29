@@ -16,7 +16,7 @@ while user_input!="":
                 plusz=False
         jelszo=input("Kérem írja be a jelszavát: ")
         megerosito=input("Ismételje meg a jelszavát!: ")
-        if jelszo!=megerosito:
+        while jelszo!=megerosito:
             print("A két jelszó nem egyezik!")
             jelszo=input("Kérem írja be a jelszavát: ")
             megerosito=input("Ismételje meg a jelszavát: ")
@@ -32,6 +32,8 @@ while user_input!="":
                 keredesek_szama=int(input("Kérem írja be a kérdések számát: "))
                 if keredesek_szama<6 and keredesek_szama>1:
                     qw=False
+                else:
+                    print("2 és 5 között!")
             except ValueError:
                 print("Számot adj meg!")
         szamok=True
