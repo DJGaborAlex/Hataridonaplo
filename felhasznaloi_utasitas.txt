@@ -1,0 +1,12 @@
+Először üdvözöl!
+Majd megkérdezi mit szeretne:
+1. ha regisztrálni akkor beírja, hogy regisztrálni. Utánna felhasznalónév megadása,  és jelszó megadása, megerősítő jelszó megadása, majd biztonsági kérdések száma minimum 2, max 5. Majd egyesével a sorszámai! Utánna a kérdésekre válaszolva kész.
+
+2. bejelentkezni, ha bejelentkezni szeretnetne beírja a felhasználónévt, jelszavát, ha sikerül akkor kiírja "A felhasználónév és a jelszó is egyezik!"(ezt 3* lehet megtenni) ha nem akkor jönnek a biztonsági kérdések, amit ha helyesen megválaszolunk akkor kiírja "Sikersen beléptél!". ha ez se sikerül akkor kiírja "Gratulálunk! Nem tudsz belépni!" "hozz létre új fiókot!" 
+
+3. ha új bejegyzést létrehozni akkor írja be új bejegyzést létre hozni, itt létre tud hozni bejegyzést és láthatja az eddigieket.
+
+4. Módosítani, ha módosítani szeretne ebben kiválaszthatja a sorszámát és módosíthatja!
+
+5. ha enter-t üt ennél a kérdésnél Kérem írja be mit szeretne csinálni: kilép az egészből!
+                        
