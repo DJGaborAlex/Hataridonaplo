@@ -123,7 +123,9 @@ while user_input!="":
                         
                     if belepve:
                         print("Sikersen beléptél!") 
-
+                    else:
+                        print("Gratulálunk! Nem tudsz belépni!")
+                        print("hozz létre új fiókot!")
     
     
     def UjBejegyzes():
@@ -192,4 +194,3 @@ while user_input!="":
         UjBejegyzes()
     if user_input=="módosítani":
         Modositas()  
-    
