@@ -182,12 +182,12 @@ while user_input!="":
                         celfajl.write(bejegyzes + '\n')
 
      
-    if user_input=="regisztálni":
+    if user_input=="regisztrálni":
         regisztralni()
     if user_input=="bejelentkezni":
         bejelentkezes()
-    if user_input=="új bejegyzés":
+    if user_input=="új bejegyzést létre hozni":
         UjBejegyzes()
-    if user_input=="módosítás":
+    if user_input=="módosítani":
         Modositas()  
     
