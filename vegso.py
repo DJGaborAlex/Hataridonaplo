@@ -35,6 +35,30 @@ def register():
     }
     save_data(data)
     print("Sikeres regisztrálás!")
+    
+def login():
+    data = load_data()
+    username = input("Add meg a felhasználó neved: ")
+    if username not in data:
+        print("Nem létezik a felhasználónév.")
+        return None
+    passwordtry = 3
+    while passwordtry !=0:
+        password = input("Add meg a jelszót: ")
+        user = data[username]
+        if hash_password(password, user["salt"]) == user["password"]:
+            print("Sikeres belépés!")
+            return username
+        else:
+            print(f"Helytelen jelszó! ({passwordtry-1} próbálkozásod maradt)")
+            passwordtry -= 1
+    answer = input(user["security_question"] + " ")
+    if hash_password(answer, user["salt"]) == user["security_answer"]:
+        print("A biztonsági kérdések helyesen megválaszolva, sikeres belépés!")
+        return username
+    print("Sikertelen belépés!")
+    return None
+    
 def main():
     while True:
         print("1. Regisztrálás")
