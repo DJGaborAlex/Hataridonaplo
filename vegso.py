@@ -38,6 +38,7 @@ def register():
     password = input("Adja meg a jelszavát: ")
     security_question = input("Adjon meg egy biztonsági kérdést: ")
     security_answer = input("Adja meg a válaszát a kérdésnek: ")
+    os.system('cls')
     salt = os.urandom(16).hex()
     data[username] = {
         "password": hash_password(password, salt),
@@ -48,7 +49,7 @@ def register():
     }
     save_data(data)
     print("Sikeres regisztrálás!")
-    
+
 def login():
     data = load_data()
     username = input("Add meg a felhasználó neved: ")
@@ -61,6 +62,7 @@ def login():
         user = data[username]
         if hash_password(password, user["salt"]) == user["password"]:
             print("Sikeres belépés!")
+            os.system('cls')
             return username
         else:
             print(f"Helytelen jelszó! ({passwordtry-1} próbálkozásod maradt)")
@@ -68,15 +70,18 @@ def login():
     answer = input(user["security_question"] + " ")
     if hash_password(answer, user["salt"]) == user["security_answer"]:
         print("A biztonsági kérdések helyesen megválaszolva, sikeres belépés!")
+        os.system('cls')
         return username
     print("Sikertelen belépés!")
     return None
 
 def add_task(username):
     data = load_data()
+    os.system('cls')
     task = input("Adja meg a feladat leírását: ")
     while True:
         deadline = input("Adja meg a határidőt (YYYY-MM-DD): ")
+        os.system('cls')
         valid_date = validate_date(deadline)
         if valid_date:
             break
@@ -91,6 +96,7 @@ def view_tasks(username):
         print("Nincs feladat.")
         return
     for i, task in enumerate(tasks, start=1):
+        print()
         print(f"{i}. {task['task']} - {task['deadline']} - {task['status']}")
     print()
 
@@ -107,7 +113,7 @@ def mark_task_complete(username):
             print("Nem megfelelő sorszám.")
     except ValueError:
         print("Adjon meg egy helyes sorszámot.")
-        
+
 def delete_task(username):
     data = load_data()
     view_tasks(username)
@@ -121,8 +127,9 @@ def delete_task(username):
             print("Nem megfelelő sorszám.")
     except ValueError:
         print("Adjon meg egy helyes sorszámot.")
-        
+
 def main():
+    os.system('cls')
     while True:
         print("1. Regisztrálás\n2. Bejelentkezés\n3. Kilépés")
         choice = input("Mit szeretne csinálni: ")
@@ -143,15 +150,17 @@ def main():
                     elif user_choice == "4":
                         delete_task(username)
                     elif user_choice == "5":
+                        os.system('cls')
                         print("Kijelentkezve.")
                         break
                     else:
                         print("Érvénytelen opció.")
         elif choice == "3":
+            os.system('cls')
             print("Viszlát!")
             break
         else:
             print("Érvénytelen opció.")
 
 if __name__ == "__main__":
-    main() 
+    main()
