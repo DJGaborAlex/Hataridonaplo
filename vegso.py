@@ -1,6 +1,7 @@
 import os
 import json
 import hashlib
+from datetime import datetime
 
 data_file = "data.json"
 
@@ -16,6 +17,18 @@ def load_data():
 def save_data(data):
     with open(data_file, "w") as file:
         json.dump(data, file, indent=4)
+
+def validate_date(input_date):
+    try:
+        date_obj = datetime.strptime(input_date, "%Y-%m-%d")
+        if date_obj < datetime.now():
+            print("A határidő nem lehet a múltban.")
+            return None
+        return date_obj
+    except ValueError:
+        print("Nem megfelelő formátum, kérem használja a (YYYY-MM-HH) formátumot.")
+        return None
+
 def register():
     data = load_data()
     username = input("Adja meg a felhasználónevét: ")
@@ -58,13 +71,38 @@ def login():
         return username
     print("Sikertelen belépés!")
     return None
-    
+
+def add_task(username):
+    data = load_data()
+    task = input("Adja meg a feladat leírását: ")
+    while True:
+        deadline = input("Adja meg a határidőt (YYYY-MM-DD): ")
+        valid_date = validate_date(deadline)
+        if valid_date:
+            break
+    data[username]["tasks"].append({"task": task, "deadline": deadline, "status": "Folyamatban"})
+    save_data(data)
+    print("Feladat sikeresen hozzáadva!")
+
 def main():
     while True:
         print("1. Regisztrálás")
         choice = input("Mit szeretne csinálni: ")
         if choice == "1":
             register()
+        elif choice == "2":
+            username = login()
+            if username:
+                while True:
+                    print("1. Feladat létrehozása\n2. Feladatok megtekintése\n3. Feladat készre állítása\n4. Feladat törlése\n5. Kijelentkezés")
+                    user_choice = input("Mit szeretne csinálni: ")
+                    if user_choice == "1":
+                        add_task(username)
+                    elif user_choice == "5":
+                        print("Kijelentkezve.")
+                        break
+                    else:
+                        print("Érvénytelen opció.")
         elif choice == "3":
             print("Viszlát!")
             break
