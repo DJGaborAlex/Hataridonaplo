@@ -107,7 +107,21 @@ def mark_task_complete(username):
             print("Nem megfelelő sorszám.")
     except ValueError:
         print("Adjon meg egy helyes sorszámot.")
-
+        
+def delete_task(username):
+    data = load_data()
+    view_tasks(username)
+    try:
+        task_number = int(input("Adja meg a törölni kívánt feladat sorszámát: "))
+        if 0 < task_number <= len(data[username]["tasks"]):
+            del data[username]["tasks"][task_number - 1]
+            save_data(data)
+            print("Feladat törölve.")
+        else:
+            print("Nem megfelelő sorszám.")
+    except ValueError:
+        print("Adjon meg egy helyes sorszámot.")
+        
 def main():
     while True:
         print("1. Regisztrálás")
@@ -126,6 +140,8 @@ def main():
                         view_tasks(username)
                     elif user_choice == "3":
                         mark_task_complete(username)
+                    elif user_choice == "4":
+                        delete_task(username)
                     elif user_choice == "5":
                         print("Kijelentkezve.")
                         break
