@@ -124,7 +124,7 @@ def delete_task(username):
         
 def main():
     while True:
-        print("1. Regisztrálás")
+        print("1. Regisztrálás\n2. Bejelentkezés\n3. Kilépés")
         choice = input("Mit szeretne csinálni: ")
         if choice == "1":
             register()
