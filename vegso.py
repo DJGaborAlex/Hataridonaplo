@@ -84,6 +84,30 @@ def add_task(username):
     save_data(data)
     print("Feladat sikeresen hozzáadva!")
 
+def view_tasks(username):
+    data = load_data()
+    tasks = data[username]["tasks"]
+    if not tasks:
+        print("Nincs feladat.")
+        return
+    for i, task in enumerate(tasks, start=1):
+        print(f"{i}. {task['task']} - {task['deadline']} - {task['status']}")
+    print()
+
+def mark_task_complete(username):
+    data = load_data()
+    view_tasks(username)
+    try:
+        task_number = int(input("Adja meg készre állítandó feladat sorszámát: "))
+        if 0 < task_number <= len(data[username]["tasks"]):
+            data[username]["tasks"][task_number - 1]["status"] = "Kész"
+            save_data(data)
+            print("Feladat készre állítva.")
+        else:
+            print("Nem megfelelő sorszám.")
+    except ValueError:
+        print("Adjon meg egy helyes sorszámot.")
+
 def main():
     while True:
         print("1. Regisztrálás")
@@ -98,6 +122,10 @@ def main():
                     user_choice = input("Mit szeretne csinálni: ")
                     if user_choice == "1":
                         add_task(username)
+                    elif user_choice == "2":
+                        view_tasks(username)
+                    elif user_choice == "3":
+                        mark_task_complete(username)
                     elif user_choice == "5":
                         print("Kijelentkezve.")
                         break
