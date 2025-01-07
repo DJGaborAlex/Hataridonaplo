@@ -1,7 +1,7 @@
 import os
 import json
 import hashlib
-from datetime import datetime
+from datetime import datetime, timedelta
 
 data_file = "data.json"
 
@@ -26,8 +26,42 @@ def validate_date(input_date):
             return None
         return date_obj
     except ValueError:
-        print("Nem megfelelő formátum, kérem használja a (YYYY-MM-HH) formátumot.")
+        print("Nem megfelelő formátum, kérem használja a (YYYY-MM-DD) formátumot.")
         return None
+
+# Aktuális hét feladatai
+
+def get_current_week_dates():
+
+    today = datetime.today()
+    
+    # Hétfő dátuma (aktualizálás a heti ciklusra)
+    start_of_week = today - timedelta(days=today.weekday())
+    
+    # Vasárnap dátuma (hét utolsó napja)
+    end_of_week = start_of_week + timedelta(days=6)
+    
+    return start_of_week, end_of_week
+
+def view_week_tasks(username):
+    data = load_data()
+    tasks = data[username]["tasks"]
+    
+    start_of_week, end_of_week = get_current_week_dates()
+
+    current_week_tasks = []
+    for task in tasks:
+        task_deadline = datetime.strptime(task["deadline"], "%Y-%m-%d")
+        if start_of_week <= task_deadline <= end_of_week:
+            current_week_tasks.append(task)
+    
+    if current_week_tasks:
+        print()
+        for i, task in enumerate(current_week_tasks, start=1):
+            print(f"{i}. {task['task']} - {task['deadline']} - {task['status']}")
+        print()
+    else:
+        print("Nincs feladat az aktuális hétre.")
 
 def register():
     data = load_data()
@@ -145,17 +179,19 @@ def main():
             username = login()
             if username:
                 while True:
-                    print("1. Feladat létrehozása\n2. Feladatok megtekintése\n3. Feladat készre állítása\n4. Feladat törlése\n5. Kijelentkezés")
+                    print("1. Feladat létrehozása\n2. Feladatok megtekintése\n3. Aktuális hét feladatai\n4. Feladat készre állítása\n5. Feladat törlése\n6. Kijelentkezés")
                     user_choice = input("Mit szeretne csinálni: ")
                     if user_choice == "1":
                         add_task(username)
                     elif user_choice == "2":
                         view_tasks(username)
                     elif user_choice == "3":
-                        mark_task_complete(username)
+                        view_week_tasks(username)
                     elif user_choice == "4":
-                        delete_task(username)
+                        mark_task_complete(username)
                     elif user_choice == "5":
+                        delete_task(username)
+                    elif user_choice == "6":
                         os.system('cls')
                         print("Kijelentkezve.")
                         break
