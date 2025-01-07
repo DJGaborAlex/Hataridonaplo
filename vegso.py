@@ -36,6 +36,12 @@ def register():
         print("Ez a felhasználónév már létezik.")
         return
     password = input("Adja meg a jelszavát: ")
+    password2 = input("Erősítse meg a jelszavát: ")
+    
+    if password != password2:
+        print("A két jelszó nem egyezik meg. Kérem próbálja újra.")
+        return
+
     security_question = input("Adjon meg egy biztonsági kérdést: ")
     security_answer = input("Adja meg a válaszát a kérdésnek: ")
     os.system('cls')
